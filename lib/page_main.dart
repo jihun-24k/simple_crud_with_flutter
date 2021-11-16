@@ -28,7 +28,6 @@ class MainPageState extends State<MainPage>{
             Expanded(
                 child: ListView(
                   children: [
-
                   ],
                 )),
             Row(
@@ -47,5 +46,3 @@ class MainPageState extends State<MainPage>{
     );
   }
 }
-
-class ListDetail extends
