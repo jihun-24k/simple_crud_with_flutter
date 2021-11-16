@@ -12,6 +12,9 @@ class MainPage extends StatefulWidget{
 }
 
 class MainPageState extends State<MainPage>{
+
+  void _onAdd() => Navigator.pushNamed(context, CREATE_PAGE);
+
   // 리스트와 추가버튼을 만든다.
   @override
   Widget build(BuildContext context){
@@ -24,14 +27,16 @@ class MainPageState extends State<MainPage>{
             // Coulmn 안에는 Expanded로 리스트를 추가
             Expanded(
                 child: ListView(
-                  children: [],
+                  children: [
+
+                  ],
                 )),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 FloatingActionButton(
                     //ToDo 눌리면 Create부분으로..!
-                    onPressed: () => {},
+                    onPressed: () => {_onAdd()},
                     child: Icon(Icons.add),
                     ),
               ],
@@ -42,3 +47,5 @@ class MainPageState extends State<MainPage>{
     );
   }
 }
+
+class ListDetail extends

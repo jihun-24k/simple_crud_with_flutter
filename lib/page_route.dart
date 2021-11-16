@@ -26,7 +26,7 @@ class StateList extends StatelessWidget{
       initialRoute: ROOT_PAGE,
       routes: {
         ROOT_PAGE: (context) => MainPage(),
-        //CREATE_PAGE: (context) => CreatePage(),
+        CREATE_PAGE: (context) => CreatePage(),
         //DETAIL_PAGE: (context) => DetailPage(),
       },
     );
