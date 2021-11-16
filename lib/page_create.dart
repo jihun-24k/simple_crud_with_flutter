@@ -3,7 +3,8 @@ import 'package:provider/provider.dart';
 
 import 'dart:io';
 
-import 'page_main.dart';
+import 'page_route.dart';
+import 'page_state.dart';
 
 class CreatePage extends StatefulWidget{
   @override
@@ -19,6 +20,8 @@ class CreatePageState extends State<CreatePage>{
   void _onCreate(BuildContext context){
     final String title = _titleContoller.text;
     final String name = _nameContoller.text;
+    final SimpleState state = Provider.of<SimpleState>(context, listen: false);
+    state.setPost(title, name);
 
     Navigator.pop(context);
   }
@@ -51,7 +54,7 @@ class CreatePageState extends State<CreatePage>{
               children: <Widget>[
                 RaisedButton(
                   child: Text('Create'),
-                  onPressed: () => {_onCreate},
+                  onPressed: () => _onCreate(context),
                 ),
                 RaisedButton(
                   child: Text('Cancel'),
