@@ -26,15 +26,14 @@ class MainPageState extends State<MainPage>{
           children: <Widget>[
             // Coulmn 안에는 Expanded로 리스트를 추가
             Expanded(
-                child: ListView(
-                  children: [
-                  ],
-                )),
+              child: ListView(
+
+              ),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 FloatingActionButton(
-                    //ToDo 눌리면 Create부분으로..!
                     onPressed: () => {_onAdd()},
                     child: Icon(Icons.add),
                     ),

@@ -36,16 +36,21 @@ class CreatePageState extends State<CreatePage>{
         padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
         child: Column(
           children: <Widget>[
-            Text('Title'),
             TextFormField(
               keyboardType: TextInputType.text,
-              decoration: InputDecoration(border: OutlineInputBorder()),
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Title',
+              ),
               controller: _titleContoller,
             ),
-            Text('Name'),
+            SizedBox(height: 10.0),
             TextFormField(
               keyboardType: TextInputType.text,
-              decoration: InputDecoration(border: OutlineInputBorder()),
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'Name',
+              ),
               controller: _nameContoller,
             ),
             SizedBox(height: 10.0),
