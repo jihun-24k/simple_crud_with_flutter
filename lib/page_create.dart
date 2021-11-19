@@ -17,11 +17,16 @@ class CreatePageState extends State<CreatePage>{
   final TextEditingController _nameContoller =
       TextEditingController();
 
+  final List<String> titleList = [];
+  final List<String> nameList = [];
+
   void _onCreate(BuildContext context){
     final String title = _titleContoller.text;
     final String name = _nameContoller.text;
+    var todo = new CRUD(title: title, name: name);
+
     final SimpleState state = Provider.of<SimpleState>(context, listen: false);
-    state.setPost(title, name);
+    state.add(todo);
 
     Navigator.pop(context);
   }

@@ -20,27 +20,21 @@ class MainPageState extends State<MainPage>{
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(title: Text('리스트')),
-      body: Container(
-        padding: EdgeInsets.fromLTRB(20,20,20,20),
-        child: Column(
-          children: <Widget>[
-            // Coulmn 안에는 Expanded로 리스트를 추가
-            Expanded(
-              child: ListView(
-
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                FloatingActionButton(
-                    onPressed: () => {_onAdd()},
-                    child: Icon(Icons.add),
+      body: Consumer<SimpleState>
+              (builder: (context, simpleState ,child) => ListView.builder(
+                padding: EdgeInsets.all(5),
+                itemCount: simpleState.cruds.length,
+                itemBuilder: (BuildContext context, int idx){
+                  return Container(
+                    height: 50,
+                    child: Center(
+                      child: Text(simpleState.cruds[idx].title),
                     ),
-              ],
-            ),
-          ],
-        ),
+                  );
+                })),
+    floatingActionButton: FloatingActionButton(
+      child: Icon(Icons.add),
+      onPressed: () => {_onAdd()},
       ),
     );
   }

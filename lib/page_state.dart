@@ -1,15 +1,24 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 
-class SimpleState extends ChangeNotifier{
-  late String _title;
-  late String _name;
-  List<SimpleState> items = [];
+class CRUD {
+  late String title;
+  late String name;
 
-  void setPost(String title, String name){
-    _title = title;
-    _name = name;
+  CRUD({required this.title, required this.name});
+}
+
+class SimpleState extends ChangeNotifier{
+  final List<CRUD> _cruds = [CRUD(title: 'Hello World', name: 'jihun')];
+
+  UnmodifiableListView<CRUD> get cruds => UnmodifiableListView(_cruds);
+
+  // 추가 상태
+  void add(CRUD crud){
+    _cruds.add(crud);
+    notifyListeners();
   }
 
-  String get title => _title;
-  String get name => _name;
+
 }
