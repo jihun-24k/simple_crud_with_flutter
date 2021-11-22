@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'dart:io';
-
 import 'page_route.dart';
 import 'page_state.dart';
 
@@ -12,18 +10,16 @@ class CreatePage extends StatefulWidget{
 }
 
 class CreatePageState extends State<CreatePage>{
+  final _key = GlobalKey();
   final TextEditingController _titleContoller =
       TextEditingController();
   final TextEditingController _nameContoller =
       TextEditingController();
 
-  final List<String> titleList = [];
-  final List<String> nameList = [];
-
   void _onCreate(BuildContext context){
     final String title = _titleContoller.text;
     final String name = _nameContoller.text;
-    var todo = new CRUD(title: title, name: name);
+    var todo = new CRUD(id: 0,title: title, name: name);
 
     final SimpleState state = Provider.of<SimpleState>(context, listen: false);
     state.add(todo);
@@ -36,6 +32,7 @@ class CreatePageState extends State<CreatePage>{
   @override
   Widget build(BuildContext context){
     return Scaffold(
+      key: _key,
       appBar: AppBar(title: Text('글 생성')),
       body: Container(
         padding: EdgeInsets.fromLTRB(20, 20, 20, 20),

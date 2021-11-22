@@ -5,6 +5,7 @@ import 'dart:io';
 
 import 'page_route.dart';
 import 'page_state.dart';
+import 'page_detail.dart';
 
 class MainPage extends StatefulWidget{
   @override
@@ -14,7 +15,6 @@ class MainPage extends StatefulWidget{
 class MainPageState extends State<MainPage>{
 
   void _onAdd() => Navigator.pushNamed(context, CREATE_PAGE);
-  void _onEdit() => Navigator.pushNamed(context, DETAIL_PAGE);
 
   // 리스트와 추가버튼을 만든다.
   @override
@@ -34,7 +34,12 @@ class MainPageState extends State<MainPage>{
                         Text(simpleState.cruds[idx].title),
                         IconButton(
                           icon: Icon(Icons.edit),
-                          onPressed: () => {_onEdit()}),
+                          onPressed: () => {
+                            Navigator.pushNamed(context, DETAIL_PAGE,
+                              arguments:
+                                ScreenArguments(simpleState.cruds[idx].id)
+                            ),
+                          }),
                       ],
                     ),
                   );
