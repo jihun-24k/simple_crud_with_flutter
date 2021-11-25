@@ -1,29 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'page_route.dart';
 import 'page_state.dart';
 
 class CreatePage extends StatefulWidget{
+  static const String routeName = '/create';
+
   @override
   State createState() => CreatePageState();
 }
 
 class CreatePageState extends State<CreatePage>{
-  final _key = GlobalKey();
   final TextEditingController _titleContoller =
       TextEditingController();
   final TextEditingController _nameContoller =
       TextEditingController();
 
-  void _onCreate(BuildContext context){
-    final String title = _titleContoller.text;
-    final String name = _nameContoller.text;
-    var todo = new CRUD(id: 0,title: title, name: name);
-
-    final SimpleState state = Provider.of<SimpleState>(context, listen: false);
-    state.add(todo);
-
+  void _onCreate(Function onCreate){
+    var todo = new CRUD(title: _titleContoller.text, name: _nameContoller.text);
+    onCreate(todo);
     Navigator.pop(context);
   }
 
@@ -32,11 +27,11 @@ class CreatePageState extends State<CreatePage>{
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      key: _key,
       appBar: AppBar(title: Text('글 생성')),
       body: Container(
         padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-        child: Column(
+        child: Consumer<SimpleState>(
+        builder: (context, simpleState, child) => Column(
           children: <Widget>[
             TextFormField(
               keyboardType: TextInputType.text,
@@ -61,7 +56,7 @@ class CreatePageState extends State<CreatePage>{
               children: <Widget>[
                 RaisedButton(
                   child: Text('Create'),
-                  onPressed: () => _onCreate(context),
+                  onPressed: () => _onCreate(simpleState.add),
                 ),
                 RaisedButton(
                   child: Text('Cancel'),
@@ -71,6 +66,7 @@ class CreatePageState extends State<CreatePage>{
             ),
           ],
         ),
+      ),
       ),
     );
   }

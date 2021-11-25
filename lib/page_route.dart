@@ -23,11 +23,15 @@ class StateList extends StatelessWidget{
     return MaterialApp(
       title: '투두투두투두',
       debugShowCheckedModeBanner: false,
-      initialRoute: ROOT_PAGE,
-      routes: {
-        ROOT_PAGE: (context) => MainPage(),
-        CREATE_PAGE: (context) => CreatePage(),
-        DETAIL_PAGE: (context) => DetailPage(),
+      home: MainPage(),
+      onGenerateRoute: (RouteSettings settings){
+        if (DetailPage.routeName == settings.name){
+          int i  = settings.arguments as int;
+          return MaterialPageRoute(builder: (context) => DetailPage(i));
+        }
+        if (CreatePage.routeName == settings.name){
+          return MaterialPageRoute(builder: (context) => CreatePage());
+        }
       },
     );
   }

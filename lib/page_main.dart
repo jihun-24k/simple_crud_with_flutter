@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'dart:io';
-
 import 'page_route.dart';
 import 'page_state.dart';
-import 'page_detail.dart';
 
 class MainPage extends StatefulWidget{
   @override
@@ -31,13 +28,12 @@ class MainPageState extends State<MainPage>{
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(simpleState.cruds[idx].title),
+                        Text('${simpleState.cruds[idx].title}'),
                         IconButton(
                           icon: Icon(Icons.edit),
                           onPressed: () => {
                             Navigator.pushNamed(context, DETAIL_PAGE,
-                              arguments:
-                                ScreenArguments(simpleState.cruds[idx].id)
+                              arguments: idx
                             ),
                           }),
                       ],

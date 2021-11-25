@@ -2,51 +2,42 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'page_state.dart';
-import 'page_main.dart';
 
 class ScreenArguments {
-  final int id;
-  ScreenArguments(this.id);
+  final int crudID;
+  ScreenArguments(this.crudID);
 }
 
 class DetailPage extends StatefulWidget{
+  static const String routeName = '/detail';
+
+  DetailPage(this._index);
+  final int _index;
+
   @override
-  State createState() => DetailPageState();
+  State createState() => DetailPageState(_index);
 }
 
 class DetailPageState extends State<DetailPage>{
-  final _key = GlobalKey();
-  final TextEditingController _titleContoller =
-  TextEditingController();
-  final TextEditingController _nameContoller =
-  TextEditingController();
+  late TextEditingController _titleContoller;
+  late TextEditingController _nameContoller;
 
-  var editList;
-  late final SimpleState simpleState;
-
-  void getId (BuildContext  context){
-    final ScreenArguments args = ModalRoute.of(context)!.settings.arguments as ScreenArguments;
-
-    editList = new SimpleState().read(args.id);
-    _titleContoller.text = editList.title;
-    _nameContoller.text = editList.name;
-  }
+  DetailPageState(this._index);
+  final int _index;
   
   void _onEdit (Function onEdit){
-    onEdit(editList.id, editList.title, editList.name);
+    onEdit(_index, _titleContoller.text, _nameContoller.text);
     Navigator.pop(context);
   }
 
   void _onDelete (Function onDelete){
-    onDelete(editList.id);
+    onDelete(_index);
     Navigator.pop(context);
   }
 
   @override
   Widget build(BuildContext context){
-    getId(context);
     return Scaffold(
-      key: _key,
       appBar: AppBar(
         title: Text('글 수정 및 삭제'),),
       body: Consumer<SimpleState>(
@@ -57,18 +48,18 @@ class DetailPageState extends State<DetailPage>{
               keyboardType: TextInputType.text,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: 'Edit',
+                labelText: 'Title',
               ),
-              controller: _titleContoller,
+              controller: _titleContoller = TextEditingController(text: simpleState.cruds[_index].title),
             ),
             SizedBox(height: 10.0),
             TextFormField(
               keyboardType: TextInputType.text,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
-                labelText: 'Delete',
+                labelText: 'Name',
               ),
-              controller: _nameContoller,
+              controller: _nameContoller = TextEditingController(text: simpleState.cruds[_index].name),
             ),
             SizedBox(height: 10.0),
             Row(
